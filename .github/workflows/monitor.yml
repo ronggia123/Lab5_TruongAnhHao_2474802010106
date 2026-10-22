@@ -1,0 +1,43 @@
+name: GoRest API Automated Monitor
+
+on:
+  schedule:
+    # Lịch chạy tự động mỗi giờ (cron syntax)
+    - cron: '0 * * * *'
+  workflow_dispatch:
+    # Cho phép bấm chạy thủ công trên giao diện GitHub Actions
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Newman & HTML Extra Reporter
+        run: npm install -g newman newman-reporter-htmlextra
+
+      - name: Run API Monitor Tests
+        env:
+          TOKEN: ${{ secrets.GOREST_TOKEN }}
+        run: |
+          newman run "2474802010106_TruongAnhHao_GoRest.postman_collection.json" \
+            -e "2474802010106_TruongAnhHao_GoRest_Env.postman_environment.json" \
+            -d users.csv \
+            --env-var "token=$TOKEN" \
+            --reporters cli,htmlextra \
+            --reporter-htmlextra-export monitor-report.html
+
+      - name: Upload Monitor HTML Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: GoRest-Monitor-Report
+          path: monitor-report.html
+          if-no-files-found: ignore
