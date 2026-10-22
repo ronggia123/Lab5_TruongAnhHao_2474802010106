@@ -36,7 +36,8 @@
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "let uniqueId = Date.now() + \"_\" + Math.floor(Math.random() * 10000);",
+                  "let iter = pm.info.iteration;",
+                  "let uniqueId = Date.now() + \"_\" + iter + \"_\" + Math.floor(Math.random() * 100000);",
                   "let rawEmail = pm.iterationData.get(\"email\") || \"user@example.com\";",
                   "let emailParts = rawEmail.split(\"@\");",
                   "let uniqueEmail = emailParts[0] + \"_\" + uniqueId + \"@\" + emailParts[1];",
