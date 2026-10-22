@@ -18,15 +18,16 @@
               "script": {
                 "type": "text/javascript",
                 "exec": [
+                  "// Chỉ nhận userId nếu tạo user thành công (status 201)",
+                  "if (pm.response.code === 201) {",
+                  "    var jsonData = pm.response.json();",
+                  "    if (jsonData && jsonData.id) {",
+                  "        pm.environment.set(\"userId\", jsonData.id);",
+                  "    }",
+                  "}",
                   "pm.test(\"Status code is 201 Created\", function () {",
                   "    pm.response.to.have.status(201);",
                   "});",
-                  "",
-                  "var jsonData = pm.response.json();",
-                  "if (jsonData && jsonData.id) {",
-                  "    pm.environment.set(\"userId\", jsonData.id);",
-                  "}",
-                  "",
                   "postman.setNextRequest(\"GET User\");"
                 ]
               }
