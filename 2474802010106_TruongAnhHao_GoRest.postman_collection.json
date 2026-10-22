@@ -2,9 +2,7 @@
   "info": {
     "_postman_id": "df5280b0-1baa-457e-84bd-b32ee72b0d2c",
     "name": "2474802010106_TruongAnhHao_GoRest",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_exporter_id": "59055439",
-    "_collection_link": "https://go.postman.co/collection/59055439-df5280b0-1baa-457e-84bd-b32ee72b0d2c?source=collection_link"
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "item": [
     {
@@ -18,7 +16,6 @@
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "// Chỉ nhận userId nếu tạo user thành công (status 201)",
                   "if (pm.response.code === 201) {",
                   "    var jsonData = pm.response.json();",
                   "    if (jsonData && jsonData.id) {",
@@ -88,7 +85,12 @@
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "pm.test(\"Status code is 200 OK\", function () {\n    pm.response.to.have.status(200);\n});\npm.test(\"Response time is less than 800ms\", function () {\n    pm.expect(pm.response.responseTime).to.be.below(800);\n});"
+                  "pm.test(\"Status code is 200 OK\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"Response time is less than 800ms\", function () {",
+                  "    pm.expect(pm.response.responseTime).to.be.below(800);",
+                  "});"
                 ]
               }
             }
@@ -96,15 +98,6 @@
           "request": {
             "method": "GET",
             "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
             "url": {
               "raw": "{{baseUrl}}/users/{{userId}}",
               "host": [
@@ -126,7 +119,13 @@
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "pm.test(\"Status code is 200 OK\", function () {\n    pm.response.to.have.status(200);\n});\npm.test(\"Status is updated to inactive\", function () {\n    var jsonData = pm.response.json();\n    pm.expect(jsonData.status).to.eql(\"inactive\");\n});"
+                  "pm.test(\"Status code is 200 OK\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"Status is updated to inactive\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.status).to.eql(\"inactive\");",
+                  "});"
                 ]
               }
             }
@@ -164,7 +163,9 @@
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "pm.test(\"Status code is 204 No Content\", function () {\n    pm.response.to.have.status(204);\n});"
+                  "pm.test(\"Status code is 204 No Content\", function () {",
+                  "    pm.response.to.have.status(204);",
+                  "});"
                 ]
               }
             }
@@ -172,15 +173,6 @@
           "request": {
             "method": "DELETE",
             "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
             "url": {
               "raw": "https://gorest.co.in/public/v2/users/{{userId}}",
               "protocol": "https",
@@ -222,7 +214,9 @@
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "pm.test(\"Status code is 401 Unauthorized\", function () {\n    pm.response.to.have.status(401);\n});"
+                  "pm.test(\"Status code is 401 Unauthorized\", function () {",
+                  "    pm.response.to.have.status(401);",
+                  "});"
                 ]
               }
             }
@@ -259,7 +253,9 @@
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "pm.test(\"Status code is 422 Unprocessable Entity\", function () {\n    pm.response.to.have.status(422);\n});"
+                  "pm.test(\"Status code is 422 Unprocessable Entity\", function () {",
+                  "    pm.response.to.have.status(422);",
+                  "});"
                 ]
               }
             }
@@ -306,7 +302,9 @@
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "pm.test(\"Status code is 404 Not Found\", function () {\n    pm.response.to.have.status(404);\n});"
+                  "pm.test(\"Status code is 404 Not Found\", function () {",
+                  "    pm.response.to.have.status(404);",
+                  "});"
                 ]
               }
             }
@@ -331,10 +329,6 @@
     }
   ],
   "variable": [
-    {
-      "key": "user_index",
-      "value": ""
-    },
     {
       "key": "name",
       "value": ""
